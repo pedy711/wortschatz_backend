@@ -1,0 +1,55 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.pco.wortschatz.server'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '13'
+
+// apply plugin: "java"
+// apply plugin: 'idea'
+// apply plugin: 'eclipse'
+// apply plugin: 'application'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 		group: 'org.springframework.boot', 		name: 'spring-boot-starter-web', 		version: '2.2.6.RELEASE'
+	compile 		group: 'org.springframework.boot', 		name: 'spring-boot-starter', 			version: '2.2.6.RELEASE'
+	testCompile 	group: 'org.springframework.boot', 		name: 'spring-boot-starter-test', 		version: '2.2.6.RELEASE'
+	compile 		group: 'org.springframework.boot', 		name: 'spring-boot-devtools', 			version: '2.2.6.RELEASE'
+	compile 		group: 'org.springframework.boot', 		name: 'spring-boot-starter-data-jpa', 	version: '2.2.6.RELEASE'
+	compile 		group: 'org.postgresql', 				name: 'postgresql', 					version: '42.2.12'
+	compile 		group: 'io.springfox', 					name: 'springfox-swagger2', 			version: '2.9.2'
+	compile 		group: 'io.springfox', 					name: 'springfox-swagger-ui', 			version: '2.9.2'
+	
+}
+
+test {
+	useJUnitPlatform()
+}
+
+eclipse.classpath.file {
+  whenMerged { classpath ->
+      classpath.entries.findAll { !(it instanceof org.gradle.plugins.ide.eclipse.model.Output) }.each { it.exported = true }
+      classpath.entries.findAll { (it instanceof org.gradle.plugins.ide.eclipse.model.Library) }.each { println it.path = it.path.replaceAll (rootProject.projectDir.parent.replaceAll ("\\\\", "/"), "") }
+  }
+}
+
+springBoot {
+  mainClassName = 'com.pco.wortschatz.server.BootappApplication'
+  buildInfo()
+}
+
+
