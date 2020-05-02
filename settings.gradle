@@ -3,4 +3,5 @@
  */
 
 rootProject.name = 'wortschatz_backend'
-include(':Wortschatz_Common', ':Wortschatz_Server')
+include ':Wortschatz_Common', ':Wortschatz_Server'
+ 
